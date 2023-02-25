@@ -55,7 +55,7 @@ public class CustomerServiceImpl implements CustomerService {
 			}
 		}
 		if(driverAvailable==null){
-			throw new Exception("No value present");
+			throw new Exception();
 		}
 
 		// set trip details
