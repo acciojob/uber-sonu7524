@@ -36,7 +36,8 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public void deleteCustomer(Integer customerId) {
 		// Delete customer without using deleteById function
-		customerRepository2.deleteById(customerId);
+		Customer customer = customerRepository2.findById(customerId).get();
+		customerRepository2.delete(customer);
 	}
 
 	@Override
@@ -49,13 +50,13 @@ public class CustomerServiceImpl implements CustomerService {
 		List<Driver>driverList=driverRepository2.findAll();
 		Driver driverAvailable = null;
 		for(Driver driver:driverList){
-			if(driver.getCab().getAvailable()){
+			if(driver.getCab().getAvailable() == true){
 				driverAvailable = driver;
 				break;
 			}
 		}
 		if(driverAvailable==null){
-			throw new Exception();
+			throw new Exception("No cab available!");
 		}
 
 		// set trip details
